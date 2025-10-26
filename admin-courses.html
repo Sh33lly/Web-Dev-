@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Courses</title>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div>
+            <h1>Training Center</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="panier.html">Cart</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <aside class="admin-sidebar">
+        <div>
+            <h2>Admin Panel</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="admin-dashboard.html">Dashboard</a></li>
+                <li><a href="admin-users.html">Users Management</a></li>
+                <li><a href="admin-orders.html">Orders Management</a></li>
+                <li><a href="admin-courses.html">Courses Management</a></li>
+                <li><a href="admin-reports.html">Reports & Analytics</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <section class="main">
+        <header>
+            <h1>Admin - Courses Management</h1>
+        </header>
+
+        <section class="search">
+            <h2>Search & Add Courses</h2>
+            <table border="1" cellpadding="10" cellspacing="0" width="100%">
+                <tr>
+                    <td width="70%">
+                        <input type="text" placeholder="Search courses by name, ID, or description...">
+                    </td>
+                    <td width="30%" align="center">
+                        <button>Search</button>
+                        <button>Add New Course</button>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="courses">
+            <h2>All Courses</h2>
+
+            <table border="1" cellpadding="10" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Description</th>
+                        <th>Duration</th>
+                        <th>Level</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Certified</th>
+                        <th>Enrolled Students</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CRS001</td>
+                        <td><input type="text" value="Web Development"></td>
+                        <td><textarea>Complete training in HTML, CSS, JavaScript and modern frameworks</textarea></td>
+                        <td><input type="text" value="6 months"></td>
+                        <td>
+                            <select>
+                                <option>Beginner</option>
+                                <option selected>Beginner to Advanced</option>
+                                <option>Intermediate</option>
+                                <option>Advanced</option>
+                                <option>All Levels</option>
+                            </select>
+                        </td>
+                        <td><input type="text" value="1200"></td>
+                        <td>★★★★☆ (4.2/5)</td>
+                        <td>
+                            <select>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                        <td>45</td>
+                        <td>
+                            <button>Save</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CRS002</td>
+                        <td><input type="text" value="Data Science"></td>
+                        <td><textarea>Master Python, data analysis and machine learning</textarea></td>
+                        <td><input type="text" value="8 months"></td>
+                        <td>
+                            <select>
+                                <option>Beginner</option>
+                                <option>Beginner to Advanced</option>
+                                <option selected>Intermediate</option>
+                                <option>Advanced</option>
+                                <option>All Levels</option>
+                            </select>
+                        </td>
+                        <td><input type="text" value="1500"></td>
+                        <td>★★★★★ (4.8/5)</td>
+                        <td>
+                            <select>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                        <td>32</td>
+                        <td>
+                            <button>Save</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CRS003</td>
+                        <td><input type="text" value="Cybersecurity"></td>
+                        <td><textarea>Learn to protect systems and networks against cyber threats</textarea></td>
+                        <td><input type="text" value="7 months"></td>
+                        <td>
+                            <select>
+                                <option>Beginner</option>
+                                <option>Beginner to Advanced</option>
+                                <option>Intermediate</option>
+                                <option selected>Advanced</option>
+                                <option>All Levels</option>
+                            </select>
+                        </td>
+                        <td><input type="text" value="1800"></td>
+                        <td>★★★★☆ (4.5/5)</td>
+                        <td>
+                            <select>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                        <td>28</td>
+                        <td>
+                            <button>Save</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CRS004</td>
+                        <td><input type="text" value="Digital Marketing"></td>
+                        <td><textarea>SEO, social media, online advertising and digital strategy</textarea></td>
+                        <td><input type="text" value="5 months"></td>
+                        <td>
+                            <select>
+                                <option>Beginner</option>
+                                <option>Beginner to Advanced</option>
+                                <option>Intermediate</option>
+                                <option>Advanced</option>
+                                <option selected>All Levels</option>
+                            </select>
+                        </td>
+                        <td><input type="text" value="900"></td>
+                        <td>★★★☆☆ (3.9/5)</td>
+                        <td>
+                            <select>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                        <td>67</td>
+                        <td>
+                            <button>Save</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CRS005</td>
+                        <td><input type="text" value="HTML & CSS"></td>
+                        <td><textarea>Learn to build modern, responsive websites with HTML5 and CSS3</textarea></td>
+                        <td><input type="text" value="4 months"></td>
+                        <td>
+                            <select>
+                                <option selected>Beginner</option>
+                                <option>Beginner to Advanced</option>
+                                <option>Intermediate</option>
+                                <option>Advanced</option>
+                                <option>All Levels</option>
+                            </select>
+                        </td>
+                        <td><input type="text" value="800"></td>
+                        <td>★★★★☆ (4.3/5)</td>
+                        <td>
+                            <select>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                        <td>89</td>
+                        <td>
+                            <button>Save</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CRS006</td>
+                        <td><input type="text" value="JavaScript"></td>
+                        <td><textarea>Master JavaScript programming, DOM manipulation, and modern ES6+ features</textarea></td>
+                        <td><input type="text" value="6 months"></td>
+                        <td>
+                            <select>
+                                <option>Beginner</option>
+                                <option>Beginner to Advanced</option>
+                                <option selected>Intermediate</option>
+                                <option>Advanced</option>
+                                <option>All Levels</option>
+                            </select>
+                        </td>
+                        <td><input type="text" value="1200"></td>
+                        <td>★★★★☆ (4.4/5)</td>
+                        <td>
+                            <select>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                        <td>54</td>
+                        <td>
+                            <button>Save</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CRS007</td>
+                        <td><input type="text" value="Python"></td>
+                        <td><textarea>Complete Python programming course from basics to advanced applications</textarea></td>
+                        <td><input type="text" value="5 months"></td>
+                        <td>
+                            <select>
+                                <option>Beginner</option>
+                                <option selected>Beginner to Advanced</option>
+                                <option>Intermediate</option>
+                                <option>Advanced</option>
+                                <option>All Levels</option>
+                            </select>
+                        </td>
+                        <td><input type="text" value="1000"></td>
+                        <td>★★★★★ (4.7/5)</td>
+                        <td>
+                            <select>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                        <td>78</td>
+                        <td>
+                            <button>Save</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+        <section class="add-course-section">
+            <h2>Add New Course</h2>
+            <table border="1" cellpadding="10" cellspacing="0" width="100%">
+                <tr>
+                    <td width="20%">Course Name:</td>
+                    <td width="30%"><input type="text" placeholder="Enter course name"></td>
+                    <td width="20%">Course ID:</td>
+                    <td width="30%"><input type="text" placeholder="Auto-generated" disabled></td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td colspan="3"><textarea placeholder="Enter course description"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Duration:</td>
+                    <td><input type="text"></td>
+                    <td>Level:</td>
+                    <td>
+                        <select>
+                            <option>Beginner</option>
+                            <option>Beginner to Advanced</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                            <option>All Levels</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td><input type="text"></td>
+                    <td>Certified:</td>
+                    <td>
+                        <select>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center">
+                        <button>Add Course</button>
+                        <button>Reset Form</button>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </section>
+</body>
+
+</html>
