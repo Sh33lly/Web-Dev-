@@ -7,38 +7,73 @@
     <title>Paiment</title>
     <link rel="stylesheet" href="global.css">
 </head>
+<style>
+    .card {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 300px;
+    }
+    
+    .main {
+        margin-left: 220px;
+        padding: 20px;
+        display: flex;
+        gap: 20px;
+    }
+</style>
+
 
 <body>
-    <nav>
-        <a href="index.html">Home</a> |
-        <a href="about.html">About</a> |
-        <a href="formation.html">Formations</a> |
+    <aside class="sidebar">
+        <div>
+            <h1>Master Education</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="panier.html">Cart</a></li>
+            </ul>
+        </nav>
+        <img src="image.png" alt="Training Center Logo" height="100px">
+    </aside>
 
-        <a href="login.html">Login</a> |
-        <a href="panier.html">Panier</a> </nav>
-    <form>
-        <h1>Paiement Method</h1>
-        <label for="cardNumber">Numéro de carte :</label>
-        <input type="text" name="cardNumber" required>
-        <br><br>
-        <label for="expiryDate">Date d'expiration :</label>
-        <input type="month" name="expiryDate" required>
-        <br><br>
-        <label for="cvv">CVV :</label>
-        <input type="text" name="cvv" required>
-        <br><br>
-        <input type="submit" value="Payer">
-    </form>
-    <form>
-        <h1>Versememt</h1>
-        <label for="RIB">RIB:</label>
-        <input type="text" name="RIB" required>
-        <br><br>
-        <label for="proof">proof of Paiement:</label>
-        <input type="image" name="proof" required>
-        <br><br>
-        <input type="submit" value="Payer"> </form>
-
+    <section class="main">
+        <div class="card">
+            <form>
+                <h1>Paiement Method</h1>
+                <label for="cardNumber">Numéro de carte :</label>
+                <input type="text" name="cardNumber" required>
+                <br><br>
+                <label for="expiryDate">Date d'expiration :</label>
+                <input type="month" name="expiryDate" required>
+                <br><br>
+                <label for="cvv">CVV :</label>
+                <input type="text" name="cvv" required>
+                <br><br>
+                <input type="submit" value="Payer">
+            </form>
+        </div>
+        <div class="card">
+            <form>
+                <h1>Versememt</h1>
+                <label for="RIB">RIB:</label>
+                <input type="text" name="RIB" required>
+                <br><br>
+                <label for="proof">proof of Paiement:</label>
+                <input type="image" name="proof" required>
+                <br><br>
+                <input type="submit" value="Payer">
+            </form>
+        </div>
+    </section>
 </body>
 
 </html>

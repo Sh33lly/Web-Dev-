@@ -9,42 +9,61 @@
     <link rel="stylesheet" href="global.css">
 </head>
 <style>
-
+    .card {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 450px;
+    }
+    
+    .main {
+        margin-left: 220px;
+        padding: 20px;
+        display: flex;
+        gap: 20px;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+    }
 </style>
 
 <body>
-    <form>
-        <h1>Formulaire d'inscription</h1>
-        <label for="name">Nom :</label>
-        <input type="text" id="name" name="name" required>
-        <br><br>
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required>
-        <br><br>
-        <label for="dob">Date de naissance :</label>
-        <input type="date" id="dob" name="dob" required>
-        <br><br>
-        <br><br>
-        <label for="dob">Phone :</label>
-        <input type="text" id="phone" name="phone" placeholder="+213 XX XXX XXX" required>
-        <br><br>
-        <br><br>
-        <label for="dob">Date de naissance :</label>
-        <input type="date" id="dob" name="dob" required>
-        <br><br>
-        <label for="statut">Statut :</label>
-        <select id="statut" name="statut" required>
+    <section class="main card">
+        <form>
+            <h1>Formulaire d'inscription</h1>
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+            <br><br>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+            <br><br>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+            <br><br>
+            <label for="dob">Date de naissance :</label>
+            <input type="date" id="dob" name="dob" required>
+            <br><br>
+            <label for="dob">Phone :</label>
+            <input type="text" id="phone" name="phone" placeholder="+213 XX XXX XXX" required>
+            <br><br>
+            <label for="dob">Date de naissance :</label>
+            <input type="date" id="dob" name="dob" required>
+            <br><br>
+            <label for="statut">Statut :</label>
+            <select id="statut" name="statut" required>
             <option value="etudiant">Étudiant</option>
             <option value="enseignant">Enseignant</option>
             <option value="autre">Autre</option>
         </select>
-        <br><br>
-
-        <input type="submit" value="S'inscrire">
-    </form>
+            <br><br>
+            <input type="submit" value="S'inscrire">
+        </form>
+    </section>
 </body>
 
 </html>
