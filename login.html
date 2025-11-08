@@ -5,30 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>
     <header>
-        <h1>You may login</h1>
+        <h1>Login Page</h1>
 
         <nav>
             <ul>
                 <li><a href="index.html">Index</a></li>
-                <li><a href="login.html">Sign up</a></li>
+                <li><a href="signup.html">Sign up</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section>
-            <h2>Login Page</h2>
+        <section class="form-section">
+            <h2>Login</h2>
             <form action="#" method="post">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br><br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br><br>
-                <input type="submit" value="Login">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required><br><br>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required><br><br>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="remember-me" name="remember-me">
+                        Remember Me
+                    </label>
+                </div>
+                <button type="submit"><a href="formation.html">Login</a></button>
             </form>
         </section>
+    </main>
 </body>
 
 </html>

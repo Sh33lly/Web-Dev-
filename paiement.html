@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>
@@ -19,19 +20,23 @@
                 <li><a href="login.html">Login</a></li>
                 <li><a href="panier.html">Panier</a></li>
             </ul>
+        </nav>
+    </header>
 </body>
 <main>
-    <h2>Complete Your Payment</h2>
-    <p>Please enter your payment details to complete the purchase.</p>
-    <form>
-        <label for="cardnumber">Card Number:</label>
-        <input type="text" id="cardnumber" name="cardnumber" required><br><br>
-        <label for="expirydate">Expiry Date:</label>
-        <input type="text" id="expirydate" name="expirydate" required><br><br>
-        <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv" required><br><br>
-        <input type="submit" value="Pay Now">
-        <button type="submit">Purchase</button>
-    </form>
+    <section>
+        <h2>Complete Your Payment</h2>
+        <p>Please enter your payment details to complete the purchase.</p>
+        <form>
+            <label for="cardnumber">Card Number:</label>
+            <input type="text" id="cardnumber" name="cardnumber" required><br><br>
+            <label for="expirydate">Expiry Date:</label>
+            <input type="text" id="expirydate" name="expirydate" required><br><br>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required><br><br>
+            <input type="submit" value="Pay Now">
+        </form>
+    </section>
+</main>
 
 </html>

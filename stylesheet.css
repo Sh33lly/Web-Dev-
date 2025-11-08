@@ -1,0 +1,276 @@
+/*Global Styles*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e6f7ff;
+    color: #000000;
+}
+
+/*Header Styles*/
+header {
+    background-color: #004d80;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin: 0 0 15px 0;
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+/*Navigation Styles*/
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    background-color: #007acc;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    /* Removed border-radius for a sharper look */
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background-color: #0099e6;
+}
+
+/*Grid Layout*/
+.container {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 30px;
+    padding: 10px;
+}
+
+
+/*Sidebar Styles*/
+aside {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+
+}
+
+.sidebar h3 {
+    color: #004d80;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin: 20px 0;
+}
+
+.sidebar a {
+    color: #007acc;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+/*card.styles*/
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.card h2 {
+    color: #004d80;
+    margin-top: 0;
+}
+
+.card p {
+    color: #333;
+    margin-top: 10px 0;
+}
+
+/*Button Styles*/
+
+button {
+    background-color: #007acc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+button:hover {
+    background-color: #0099e6;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+/*Footer Styles*/
+footer {
+    background-color: #004d80;
+    color: rgb(180, 210, 230);
+    text-align: center;
+    padding: 15px;
+    margin-top: 82px;
+    margin-bottom: 0;
+    font-size: 1em;
+}
+
+/*table styles*/
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* removes double borders */
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/*table button styles*/
+table button {
+    background-color: #0099e6;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+table button:hover {
+    background-color: #a8d4e9;
+    transform: scale(1.1);
+}
+
+th {
+    background-color: #004d80;
+    color: #ffffff;
+    padding: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+caption {
+    color: #004d80;
+    caption-side: top;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/*Form Styles*/
+.form-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 60px auto;
+    width: 60%;
+    max-width: 500px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.form-section h2 {
+    text-align: center;
+    color: #004d80;
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+label {
+    color: #333;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007acc;
+    box-shadow: 0 0 6px rgba(0, 122, 204, 0.3);
+    outline: none;
+}
+
+button[type="submit"],
+input[type="submit"] {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 10px auto 0;
+    display: block;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+    background-color: #0099e6;
+    transform: scale(1.05);
+}
