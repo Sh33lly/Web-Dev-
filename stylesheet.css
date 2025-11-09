@@ -193,6 +193,25 @@ caption {
     font-weight: bold;
 }
 
+/*course section styles*/
+.course-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 60px auto;
+    width: 80%;
+    text-align: center;
+}
+
+.course-section h2,
+h3 {
+    color: #004d80;
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
 /*Form Styles*/
 .form-section {
     background-color: #ffffff;
