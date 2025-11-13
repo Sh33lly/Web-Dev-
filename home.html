@@ -182,7 +182,14 @@
             border-radius: 29px;
             width: 1300px;
             height: 350px;
+            background: var(--bg-secondary);
+        }
+        
+        .hh::before {
+            content: "";
+            inset: 0;
             background: repeating-linear-gradient( to bottom, rgba(255, 255, 255, 0.089) 0, rgba(0, 0, 0, 0.288) 1px), repeating-linear-gradient( to right, rgba(255, 255, 255, 0.082) 0, rgba(0, 0, 0, 0.438) 1px);
+            mix-blend-mode: overlay;
         }
         
         .hero h1 {
