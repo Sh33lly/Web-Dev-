@@ -1,4 +1,4 @@
-/*Global Styles*/
+/*GLOBAL STYLES*/
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,7 +7,41 @@ body {
     color: #000000;
 }
 
-/*Header Styles*/
+/*Layout Grid for Desktop*/
+.layout {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "nav nav"
+        "main aside"
+        "footer footer";
+    grid-template-columns: 4fr 1fr;
+    gap: 30px;
+    padding: 20px;
+}
+
+/*Area Assignments*/
+header {
+    grid-area: header;
+}
+
+nav {
+    grid-area: nav;
+}
+
+main {
+    grid-area: main;
+}
+
+aside {
+    grid-area: aside;
+}
+
+footer {
+    grid-area: footer;
+}
+
+/*HEADER*/
 header {
     background-color: #004d80;
     color: white;
@@ -21,15 +55,16 @@ header h1 {
     text-transform: uppercase;
 }
 
-/*Navigation Styles*/
+/*NAVIGATION (grid version)*/
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
+
+    display: grid;
+    grid-auto-flow: column;
     justify-content: center;
     gap: 20px;
-
 }
 
 nav a {
@@ -37,7 +72,6 @@ nav a {
     color: white;
     padding: 10px 20px;
     text-decoration: none;
-    /* Removed border-radius for a sharper look */
     border-radius: 5px;
 }
 
@@ -45,7 +79,7 @@ nav a:hover {
     background-color: #0099e6;
 }
 
-/*Grid Layout*/
+/*MAIN GRID CONTAINER*/
 .container {
     display: grid;
     grid-template-columns: 4fr 1fr;
@@ -53,13 +87,11 @@ nav a:hover {
     padding: 10px;
 }
 
-
-/*Sidebar Styles*/
+/*SIDEBAR*/
 aside {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 12px;
-
 }
 
 .sidebar h3 {
@@ -70,10 +102,9 @@ aside {
     list-style: none;
     padding: 0;
     margin: 0;
-}
 
-.sidebar li {
-    margin: 20px 0;
+    display: grid;
+    gap: 20px;
 }
 
 .sidebar a {
@@ -81,8 +112,7 @@ aside {
     text-decoration: none;
 }
 
-
-/*card.styles*/
+/*CARDS*/
 .card {
     background-color: white;
     border-radius: 12px;
@@ -90,6 +120,7 @@ aside {
     padding: 20px;
     margin: 20px 0;
     text-align: left;
+
 }
 
 .card:hover {
@@ -107,8 +138,7 @@ aside {
     margin-top: 10px;
 }
 
-/*Button Styles*/
-
+/*BUTTONS*/
 button {
     background-color: #007acc;
     border-radius: 5px;
@@ -128,7 +158,7 @@ button a {
     text-decoration: none;
 }
 
-/*Footer Styles*/
+/*FOOTER*/
 footer {
     background-color: #004d80;
     color: rgb(180, 210, 230);
@@ -139,12 +169,10 @@ footer {
     font-size: 1em;
 }
 
-/*table styles*/
-
+/*TABLES*/
 table {
     width: 100%;
     border-collapse: collapse;
-    /* removes double borders */
     margin: 20px 0;
     font-size: 16px;
     text-align: left;
@@ -154,7 +182,6 @@ table {
     overflow: hidden;
 }
 
-/*table button styles*/
 table button {
     background-color: #0099e6;
     color: white;
@@ -194,7 +221,7 @@ caption {
     font-weight: bold;
 }
 
-/*course/events/panier section styles*/
+/*COURSE / EVENTS / MEDIA*/
 .course-section {
     background-color: #ffffff;
     padding: 40px;
@@ -203,17 +230,20 @@ caption {
     margin: 60px auto;
     width: 80%;
     text-align: center;
+
+    display: grid;
+    gap: 20px;
 }
 
 .course-section h2,
-h3 {
+.course-section h3 {
     color: #004d80;
     margin-top: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-/*Form Styles*/
+/*FORMS*/
 .form-section {
     background-color: #ffffff;
     padding: 40px;
@@ -222,7 +252,10 @@ h3 {
     margin: 60px auto;
     width: 60%;
     max-width: 500px;
-    text-align: left;
+
+    display: grid;
+    gap: 20px;
+
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -240,21 +273,17 @@ h3 {
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 18px;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+    display: grid;
+    gap: 6px;
 }
 
 label {
     color: #333;
-    margin-bottom: 6px;
     font-weight: bold;
 }
 
@@ -293,4 +322,45 @@ button[type="submit"]:hover,
 input[type="submit"]:hover {
     background-color: #0099e6;
     transform: scale(1.05);
+}
+
+/*RESPONSIVE BREAKPOINTS*/
+
+/* Mobile */
+@media (max-width: 700px) {
+    .layout {
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "aside"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+
+    nav ul {
+        grid-auto-flow: row;
+        justify-content: center;
+    }
+
+    .course-section {
+        width: 95%;
+    }
+
+    .form-section {
+        width: 90%;
+    }
+}
+
+/* Tablet */
+@media (min-width: 700px) and (max-width: 1000px) {
+    .layout {
+        grid-template-areas:
+            "header header"
+            "nav nav"
+            "main main"
+            "aside aside"
+            "footer footer";
+        grid-template-columns: 1fr 1fr;
+    }
 }
