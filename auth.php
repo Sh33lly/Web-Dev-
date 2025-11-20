@@ -160,11 +160,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 New to Master Edu? <a href="#" id="showSignupLink">Sign up</a>
             </div>
 
-            <!-- Demo accounts info -->
-            <div style="margin-top: 20px; padding: 15px; background: var(--bg-tertiary); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">
-                <strong>Demo Accounts (check your database):</strong><br>
-                Use any user from your webdev database
-            </div>
         </div>
 
         <!-- Signup Form -->

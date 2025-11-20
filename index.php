@@ -299,7 +299,7 @@ try {
             border-radius: 29px;
             width: 100%;
             max-width: 1300px;
-            height: 300px;
+            height: 330px;
             background: var(--bg-secondary);
             position: relative;
             overflow: hidden;
