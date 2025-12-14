@@ -1,12 +1,15 @@
 <?php
 session_start();
 
+
 require_once __DIR__ . '/../config/database.php';
 
+// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: auth.php");
     exit;
 }
+// Create database object
 $database = new Database();
 $db = $database->getConnection();
 
@@ -653,16 +656,16 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
         
         // Action Functions
         function viewStudent(id) {
-            window.location.href = 'view-user.php?id=' + id;
+            window.location.href = 'view-student.php?id=' + id;
         }
         
         function editStudent(id) {
-            window.location.href = 'edit-user.php?id=' + id;
+            window.location.href = 'edit-student.php?id=' + id;
         }
         
         function deleteStudent(id) {
             if (confirm('Are you sure you want to delete this student?')) {
-                window.location.href = 'delete-user.php?id=' + id;
+                window.location.href = 'delete-student.php?id=' + id;
             }
         }
     </script>

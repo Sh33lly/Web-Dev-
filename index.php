@@ -46,9 +46,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Lusitana:wght@400;700&display=swap" rel="stylesheet">    
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Lusitana:wght@400;700&display=swap" rel="stylesheet">
     <title>Dashboard - Master Edu</title>
     <style>
         /* RESET */
@@ -108,27 +106,30 @@ try {
         /* Theme Toggle Button */
         
         .theme-toggle {
-                position: fixed;
-                bottom: 24px;
-                right: 24px;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                background: transparent;
-                color: var(--text-primary);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                border: none;
-                font-size: 20px;
-                z-index: 100;
-                transition: all 0.3s;
-            }
-            
-            .theme-toggle:hover {
-                transform: scale(1.1);
-            }
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            border-color: var(--btn-bg);
+            color: var(--btn-text);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            background: var(--bg-card);
+            border: 2px solid var(--btn-bg);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--btn-hover);
+        }
         /* Section separator with line */
         
         .section-separator {
@@ -842,7 +843,8 @@ try {
 </head>
 
 <body>
- 
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">light mode</button>
 
     <!-- Header -->
     <header>
@@ -1048,9 +1050,7 @@ try {
             </div>
         </div>
     </section>
- <button class="theme-toggle" id="theme-toggle">
-        <i class="fas fa-moon"></i>
-    </button>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1099,28 +1099,30 @@ try {
     </footer>
 
     <script>
-  const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = themeToggle.querySelector('i');
-            const body = document.body;
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
 
-            // Load saved theme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                body.classList.add('light-mode');
-                themeIcon.className = 'fas fa-moon';
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            themeToggle.textContent = '';
+        } else {
+            themeToggle.textContent = '';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = 'light mode';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = 'dark mode';
             }
-
-            themeToggle.addEventListener('click', function() {
-                body.classList.toggle('light-mode');
-
-                if (body.classList.contains('light-mode')) {
-                    themeIcon.className = 'fas fa-moon';
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    themeIcon.className = 'fas fa-sun';
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
+        });
 
         // User menu dropdown
         document.getElementById('userMenuBtn').addEventListener('click', function(e) {
