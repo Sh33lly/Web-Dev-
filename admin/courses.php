@@ -48,7 +48,7 @@ if (isset($_GET['delete_id']) && $is_admin) {
     exit;
 }
 
-// Handle status change
+
 if (isset($_GET['change_status']) && $is_admin) {
     $course_id = $_GET['change_status'];
     $new_status = $_GET['status'];
@@ -58,8 +58,6 @@ if (isset($_GET['change_status']) && $is_admin) {
     header("Location: courses.php?message=Status+updated+successfully");
     exit;
 }
-
-// Handle inline edit submission
 if (isset($_POST['edit_course']) && $is_admin) {
     $course_id = $_POST['course_id'];
     $title = $_POST['title'];
@@ -148,6 +146,19 @@ $teachers = $teachers_result->fetchAll();
             --info: #2ed573;
             --sidebar-width: 260px;
         }
+  .light-mode {
+                --bg-primary: #f8f9fa;
+                --bg-secondary: #BFB6D9;
+                --bg-tertiary: #b4a8d8ff;
+                --bg-card1: #aea0d8ff;
+                --bg-card: #BFB6D9;
+                --bg-card-hover: #e9ecef;
+                --text-primary: #212529;
+                --text-secondary: #495057;
+                --btn-bg: #9DFF57;
+                --btn-text: #14002E;
+                --btn-hover: #8BED4A;
+            }
         
         body {
             background: var(--bg-primary);
@@ -526,6 +537,32 @@ $teachers = $teachers_result->fetchAll();
             border: 1px solid var(--info);
             color: var(--info);
         }
+/* Theme Toggle */
+       
+            .theme-toggle {
+                position: fixed;
+                bottom: 24px;
+                right: 24px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: transparent;
+                color: var(--text-primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                border: none;
+                font-size: 20px;
+                z-index: 100;
+                transition: all 0.3s;
+            }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+
     </style>
 </head>
 <body>
@@ -632,14 +669,7 @@ $teachers = $teachers_result->fetchAll();
             <?php endif; ?>
         </form>
 
-        <!-- Success Message -->
-        <?php if (isset($_GET['message'])): ?>
-            <div class="alert">
-                <span><?php echo htmlspecialchars($_GET['message']); ?></span>
-                <button onclick="this.parentElement.style.display='none'">&times;</button>
-            </div>
-        <?php endif; ?>
-
+    
         <!-- Tabs -->
         <div class="tabs">
             <div class="tab active" onclick="filterCourses('all')">All Courses</div>
@@ -820,8 +850,34 @@ $teachers = $teachers_result->fetchAll();
             <?php endif; ?>
         </div>
     </main>
-
+  
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
     <script>
+ // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const body = document.body;
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light-mode');
+            themeIcon.className = 'fas fa-moon';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
         function filterCourses(filter) {
             // Update active tab
             const tabs = document.querySelectorAll('.tab');
