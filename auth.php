@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = $_POST['password'];
         
         if (!empty($email) && !empty($password)) {
-            // SIMPLE QUERY LIKE IN YOUR IMAGE
+           
             $query = "SELECT * FROM users WHERE email = '$email'";
             $result = mysqli_query($conn, $query);
             
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['user_email'] = $user['email'];
                     $_SESSION['last_name'] = $user['last_name'];
                     
-                    // SIMPLE IF STATEMENTS
+                    
                     if ($user['role'] == 'admin') {
                         header("Location: admin/dashboard.php");
                     } else if ($user['role'] == 'formateur') {
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $phone = $_POST['phone'] ?? '';
     
         if (!empty($email) && !empty($password) && !empty($first_name) && !empty($last_name)) {
-            // Check if email exists
+            
             $check_query = "SELECT id FROM users WHERE email = '$email'";
             $check_result = mysqli_query($conn, $check_query);
             
