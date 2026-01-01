@@ -680,6 +680,7 @@ $teachers = $teachers_result->fetchAll();
             <div class="tab" onclick="filterCourses('upcoming')">Upcoming</div>
             <div class="tab" onclick="filterCourses('active')">Active</div>
             <div class="tab" onclick="filterCourses('completed')">Completed</div>
+ <div class="tab" onclick="filterCourses('pending')">Pending Approvals</div>
         </div>
 
         <!-- Courses Grid -->
@@ -746,6 +747,7 @@ $teachers = $teachers_result->fetchAll();
                                                 <a href="?change_status=<?php echo $course['id']; ?>&status=completed">
                                                     Set as Completed
                                                 </a>
+
                                             </div>
                                         </div>
                                         
