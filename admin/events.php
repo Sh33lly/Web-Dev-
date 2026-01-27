@@ -714,7 +714,7 @@ $event_types = $event_types_result->fetchAll();
                     <span class="menu-badge"><?php echo $pendingApprovals; ?></span>
                 <?php endif; ?>
             </a>
-            <a href="user-management.php" class="menu-item">
+            <a href="users.php" class="menu-item">
                 <i class="fas fa-user-cog"></i>
                 <span>User Management</span>
             </a>

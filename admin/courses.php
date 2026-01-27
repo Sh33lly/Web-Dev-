@@ -11,14 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 $database = new Database();
 $db = $database->getConnection();
 
-// Get user role
 $user_id = $_SESSION['user_id'];
 $query = "SELECT role FROM users WHERE id = $user_id";
 $result = $db->query($query);
 $user_role = $result->fetch()['role'];
 $is_admin = $user_role === 'admin';
 
-// Get statistics for sidebar
 $query = "SELECT COUNT(*) as total FROM users WHERE role = 'student'";
 $result = $db->query($query);   
 $totalStudents = $result->fetch()['total'];
@@ -39,7 +37,6 @@ $query = "SELECT COUNT(*) as total FROM users WHERE role = 'formateur'";
 $result = $db->query($query);
 $totalFormateurs = $result->fetch()['total'];
 
-// Handle delete action
 if (isset($_GET['delete_id']) && $is_admin) {
     $delete_id = $_GET['delete_id'];
     $query = "DELETE FROM courses WHERE id = $delete_id";
@@ -83,11 +80,10 @@ if (isset($_POST['edit_course']) && $is_admin) {
     exit;
 }
 
-// Search and filter
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $status_filter = isset($_GET['status_filter']) ? $_GET['status_filter'] : 'all';
 
-// Build query
+
 $query = "SELECT c.*, 
           (SELECT COUNT(*) FROM user_courses WHERE course_id = c.id) as registered_students,
           t.first_name as teacher_firstname,
@@ -110,7 +106,6 @@ $query .= " ORDER BY c.created_at DESC";
 $result = $db->query($query);
 $courses = $result->fetchAll();
 
-// Get all teachers for dropdown
 $teachers_query = "SELECT id, CONCAT(first_name, ' ', last_name) as name FROM users WHERE role = 'formateur'";
 $teachers_result = $db->query($teachers_query);
 $teachers = $teachers_result->fetchAll();
@@ -579,7 +574,7 @@ $teachers = $teachers_result->fetchAll();
             </div>
 
             <nav class="sidebar-menu">
-                <a href="dashboard.php" class="menu-item active">
+                <a href="dashboard.php" class="menu-item">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
@@ -593,7 +588,7 @@ $teachers = $teachers_result->fetchAll();
                     <span>Teachers</span>
                     <span class="menu-badge"><?php echo $totalFormateurs; ?></span>
                 </a>
-                <a href="courses.php" class="menu-item">
+                <a href="courses.php" class="menu-item active">
                     <i class="fas fa-book"></i>
                     <span>Courses</span>
                     <span class="menu-badge"><?php echo $activeCourses; ?></span>
@@ -628,7 +623,7 @@ $teachers = $teachers_result->fetchAll();
                     <span class="menu-badge"><?php echo $pendingApprovals; ?></span>
                     <?php endif; ?>
                 </a>
-                <a href="user-management.php" class="menu-item">
+                <a href="users.php" class="menu-item">
                     <i class="fas fa-user-cog"></i>
                     <span>User Management</span>
                 </a>

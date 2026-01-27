@@ -510,7 +510,7 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
                 <span class="menu-badge"><?php echo $totalpending['total']; ?></span>
                 <?php endif; ?>
             </a>
-            <a href="user-management.php" class="menu-item">
+            <a href="users.php" class="menu-item">
                 <i class="fas fa-user-cog"></i>
                 <span>User Management</span>
             </a>

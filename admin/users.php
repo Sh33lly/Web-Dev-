@@ -1,21 +1,19 @@
 <?php
 session_start();
 
-
 require_once __DIR__ . '/../config/database.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: auth.php");
     exit;
 }
-
 $database = new Database();
 $db = $database->getConnection();
 
 
-$query = "SELECT * FROM users WHERE role = 'formateur' ORDER BY created_at DESC";
+$query = "SELECT * FROM users ORDER BY created_at DESC";
 $result = $db->query($query);   
-$formateurs = $result->fetchAll(PDO::FETCH_ASSOC);
+$students = $result->fetchAll(PDO::FETCH_ASSOC);
 
 
 $countQuery = "SELECT COUNT(*) as total FROM users WHERE role = 'student'";
@@ -31,9 +29,11 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
     $courseresult = $db->query($activeCoursesquery);
     $activeCourses = $courseresult->fetch(PDO::FETCH_ASSOC);
 
+
   $formateurquery = "SELECT COUNT(*) as total FROM users WHERE role = 'formateur'";
      $formateurresult = $db->query($formateurquery);
     $totalFormateurs = $formateurresult->fetch(PDO::FETCH_ASSOC);
+
 
  $pendingquery = "SELECT COUNT(*) as total FROM registrations WHERE status = 'pending'";
      $pendingresult = $db->query($pendingquery);
@@ -472,7 +472,7 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
                 <span>Students</span>
                 <span class="menu-badge"><?php echo $totalStudents['total']; ?></span>
             </a>
-            <a href="teachers.php" class="menu-item active">
+            <a href="teachers.php" class="menu-item">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Teachers</span>
                 <span class="menu-badge"><?php echo $totalFormateurs['total']; ?></span>
@@ -509,7 +509,7 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
                 <span class="menu-badge"><?php echo $totalpending['total']; ?></span>
                 <?php endif; ?>
             </a>
-            <a href="users.php" class="menu-item">
+            <a href="users.php" class="menu-item active">
                 <i class="fas fa-user-cog"></i>
                 <span>User Management</span>
             </a>
@@ -530,9 +530,9 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
                 <p>Manage all registered students</p>
             </div>
             <div class="header-actions">
-                <a href="add-user.php" class="btn-primary">
+                <a href="add-student.php" class="btn-primary">
                     <i class="fas fa-plus"></i>
-                    Add New Teacher
+                    Add New Student
                 </a>
                 <div class="user-profile">
                     <div class="user-avatar">
@@ -546,7 +546,7 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
      
         <!-- Search Bar -->
         <div class="search-bar">
-            <input type="text" placeholder="Search students by name or email..." style="font-family: 'Lusitana', serif;" id="searchInput" onkeyup="searchTeachers()">
+            <input type="text" placeholder="Search students by name or email..." style="font-family: 'Lusitana', serif;" id="searchInput" onkeyup="searchStudents()">
         </div>
         
         <!-- Students Table -->
@@ -563,32 +563,32 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($formateurs as $formateur): ?>
+                    <?php foreach($students as $student): ?>
                     <tr>
                         <td>
                             <div class="student-info">
                                 <div class="student-avatar">
-                                    <?php echo strtoupper(substr($formateur['first_name'], 0, 1)); ?>
+                                    <?php echo strtoupper(substr($student['first_name'], 0, 1)); ?>
                                 </div>
                                 <div class="student-details">
-                                    <h4><?php echo htmlspecialchars($formateur['first_name'] . ' ' . $formateur['last_name']); ?></h4>
-                                    <p>ID: #<?php echo $formateur['id']; ?></p>
+                                    <h4><?php echo htmlspecialchars($student['first_name'] . ' ' . $student['last_name']); ?></h4>
+                                    <p>ID: #<?php echo $student['id']; ?></p>
                                 </div>
                             </div>
                         </td>
-                        <td><?php echo htmlspecialchars($formateur['email']); ?></td>
-                        <td><?php echo htmlspecialchars($formateur['phone'] ?? 'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($student['email']); ?></td>
+                        <td><?php echo htmlspecialchars($student['phone'] ?? 'N/A'); ?></td>
                     
-                        <td><?php echo date('M d, Y', strtotime($formateur['created_at'])); ?></td>
+                        <td><?php echo date('M d, Y', strtotime($student['created_at'])); ?></td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-action btn-view" onclick="viewStudent(<?php echo $formateur['id']; ?>)">
+                                <button class="btn-action btn-view" onclick="viewStudent(<?php echo $student['id']; ?>)">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn-action btn-edit" onclick="editStudent(<?php echo $formateur['id']; ?>)">
+                                <button class="btn-action btn-edit" onclick="editStudent(<?php echo $student['id']; ?>)">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-action btn-delete" onclick="deleteStudent(<?php echo $formateur['id']; ?>)">
+                                <button class="btn-action btn-delete" onclick="deleteStudent(<?php echo $student['id']; ?>)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -654,7 +654,7 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
             }
         }
         
-        // Action Functions
+       
         function viewStudent(id) {
             window.location.href = 'view-user.php?id=' + id;
         }
@@ -664,7 +664,7 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
         }
         
         function deleteStudent(id) {
-            if (confirm('Are you sure you want to delete this user?')) {
+            if (confirm('Are you sure you want to delete this student?')) {
                 window.location.href = 'delete-user.php?id=' + id;
             }
         }
