@@ -530,9 +530,9 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
                 <p>Manage all registered students</p>
             </div>
             <div class="header-actions">
-                <a href="add-student.php" class="btn-primary">
+                <a href="add-user.php" class="btn-primary">
                     <i class="fas fa-plus"></i>
-                    Add New Student
+                    Add New User
                 </a>
                 <div class="user-profile">
                     <div class="user-avatar">

@@ -4,33 +4,33 @@ session_start();
 require_once __DIR__ . '/../config/database.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: auth.php");
+    header("Location: ../auth.php");
     exit;
 }
 $database = new Database();
 $db = $database->getConnection();
 
-// Get all students
+
 $query = "SELECT * FROM users WHERE role = 'student' ORDER BY created_at DESC";
 $result = $db->query($query);   
 $students = $result->fetchAll(PDO::FETCH_ASSOC);
 
-// Get total students count
+
 $countQuery = "SELECT COUNT(*) as total FROM users WHERE role = 'student'";
 $countResult = $db->query($countQuery);   
 $totalStudents = $countResult->fetch(PDO::FETCH_ASSOC);
 
-// Get current user info
+
 $userQuery = "SELECT * FROM users WHERE id = " . $_SESSION['user_id'];
 $userResult = $db->query($userQuery);
 $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
 
-// Get active courses count
+
     $activeCoursesquery= "SELECT COUNT(*) as total FROM courses";
     $courseresult = $db->query($activeCoursesquery);
     $activeCourses = $courseresult->fetch(PDO::FETCH_ASSOC);
 
-// Get formateurs count
+
   $formateurquery = "SELECT COUNT(*) as total FROM users WHERE role = 'formateur'";
      $formateurresult = $db->query($formateurquery);
     $totalFormateurs = $formateurresult->fetch(PDO::FETCH_ASSOC);
@@ -531,7 +531,7 @@ $currentUser = $userResult->fetchAll(PDO::FETCH_ASSOC);
                 <p>Manage all registered students</p>
             </div>
             <div class="header-actions">
-                <a href="add-student.php" class="btn-primary">
+                <a href="add-user.php" class="btn-primary">
                     <i class="fas fa-plus"></i>
                     Add New Student
                 </a>

@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
     if ($stmt->rowCount() > 0) {
         $error = "Email already exists!";
     } else {
-        $insertQuery = "INSERT INTO users (first_name, last_name, email, phone, password, role) 
+        $insertQuery = "INSERT INTO users (first_name, last_name, email, phone, password_hash, role) 
                        VALUES (:first_name, :last_name, :email, :phone, :password, :role)";
         $stmt = $db->prepare($insertQuery);
         $stmt->bindParam(':first_name', $first_name);
