@@ -11,12 +11,11 @@ if (!isset($_SESSION['user_id'])) {
 $database = new Database();
 $db = $database->getConnection();
 
-// Get current user info
+
 $userQuery = "SELECT * FROM users WHERE id = " . $_SESSION['user_id'];
 $userResult = $db->query($userQuery);
 $currentUser = $userResult->fetch(PDO::FETCH_ASSOC);
 
-// Get counts for sidebar
 $query = "SELECT COUNT(*) as total FROM users WHERE role = 'student'";
 $result = $db->query($query);   
 $totalStudents = $result->fetch()['total'];
@@ -33,7 +32,7 @@ $query = "SELECT COUNT(*) as total FROM registrations WHERE status = 'pending'";
 $result = $db->query($query);
 $totalpending = $result->fetch()['total'];
 
-// Handle form submission
+
 $error = '';
 $success = '';
 
@@ -45,26 +44,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
     $role = $_POST['role'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     
-    // Check if email already exists
-    $checkQuery = "SELECT id FROM users WHERE email = :email";
-    $stmt = $db->prepare($checkQuery);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
+  
+    $checkQuery = "SELECT id FROM users WHERE email = '$email'";
+    $checkResult = $db->query($checkQuery);
     
-    if ($stmt->rowCount() > 0) {
+    if ($checkResult->rowCount() > 0) {
         $error = "Email already exists!";
     } else {
+       
         $insertQuery = "INSERT INTO users (first_name, last_name, email, phone, password_hash, role) 
-                       VALUES (:first_name, :last_name, :email, :phone, :password, :role)";
-        $stmt = $db->prepare($insertQuery);
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':role', $role);
+                       VALUES ('$first_name', '$last_name', '$email', '$phone', '$password', '$role')";
         
-        if ($stmt->execute()) {
+        if ($db->query($insertQuery)) {
             $success = "User added successfully!";
             // Clear form
             $_POST = array();
@@ -74,12 +65,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
     }
 }
 
-// Get all users for display
+
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+    
+
+    if ($delete_id != $_SESSION['user_id']) {
+        $deleteQuery = "DELETE FROM users WHERE id = $delete_id";
+        if ($db->query($deleteQuery)) {
+            $success = "User deleted successfully!";
+        } else {
+            $error = "Failed to delete user!";
+        }
+    } else {
+        $error = "You cannot delete your own account!";
+    }
+}
+
+
+if (isset($_GET['toggle_status'])) {
+    $user_id = $_GET['toggle_status'];
+    
+    if ($user_id != $_SESSION['user_id']) {
+        
+        $statusQuery = "SELECT is_active FROM users WHERE id = $user_id";
+        $statusResult = $db->query($statusQuery);
+        $statusData = $statusResult->fetch(PDO::FETCH_ASSOC);
+        
+        $new_status = $statusData['is_active'] == 1 ? 0 : 1;
+        
+        $updateQuery = "UPDATE users SET is_active = $new_status WHERE id = $user_id";
+        if ($db->query($updateQuery)) {
+            $success = "User status updated successfully!";
+        } else {
+            $error = "Failed to update user status!";
+        }
+    } else {
+        $error = "You cannot change your own status!";
+    }
+}
+
+
 $query = "SELECT * FROM users ORDER BY created_at DESC";
 $result = $db->query($query);   
 $users = $result->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
