@@ -8,12 +8,40 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+
 $database = new Database();
 $db = $database->getConnection();
 
 $user_id = $_SESSION['user_id'];
 $first_name = $_SESSION['first_name'] ?? 'User';
 $last_name = $_SESSION['last_name'] ?? 'User';
+
+// Get user's subscriptions count
+$subscriptionsQuery = "SELECT COUNT(*) as total FROM user_courses WHERE user_id = $user_id";
+$subscriptionsResult = $db->query($subscriptionsQuery);
+$totalSubscriptions = $subscriptionsResult->fetch()['total'];
+
+// Get certificates count
+$certsQuery = "SELECT COUNT(*) as total FROM certs_obtained WHERE user_id = $user_id";
+$certsResult = $db->query($certsQuery);
+$totalCertificates = $certsResult->fetch()['total'];
+
+// Get cart items count
+$cartQuery = "SELECT COUNT(*) as total FROM user_cart WHERE user_id = $user_id AND cart_type = 'main'";
+$cartResult = $db->query($cartQuery);
+$cartCount = $cartResult->fetch()['total'];
+
+// Get wishlist count
+$wishlistQuery = "SELECT COUNT(*) as total FROM user_cart WHERE user_id = $user_id AND cart_type = 'wishlist'";
+$wishlistResult = $db->query($wishlistQuery);
+$wishlistCount = $wishlistResult->fetch()['total'];
+
+// Get user role
+$query = "SELECT role FROM users WHERE id = $user_id";
+$result = $db->query($query);
+$user_role = $result->fetch()['role'];
+$is_admin = $user_role === 'admin';
+
 
 // Get cart items for current user
 $cart_query = "SELECT 
@@ -145,6 +173,144 @@ if (isset($_POST['clear_cart'])) {
             justify-content: space-between;
             align-items: center;
             padding: 18px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .logo svg {
+            width: 28px;
+            height: 28px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Navigation Links */
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+        
+        .nav-link i {
+            font-size: 16px;
+        }
+
+        .nav-badge {
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* User Menu */
+        .user-menu {
+            position: relative;
+        }
+        
+        .user-button {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-family: "Lusitana", serif;
+            font-size: 14px;
+        }
+        
+        .user-button:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 10px;
+            min-width: 200px;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 12px 15px;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .dropdown-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 10px 0;
         }
         
         .logo {
@@ -512,35 +678,67 @@ background: var(--bg-secondary);
 </head>
 <body>
       <!-- Header -->
-    <header>
+       <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <a href="dashboard.php" class="logo">
                     <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
                         <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
                     </svg>
                     <span>Master Edu</span>
-                </div>
+                </a>
                 <nav>
+                    <a href="my-subscriptions.php" class="nav-link">
+                        <i class="fas fa-book-reader"></i>
+                        <span>Subscriptions</span>
+                        <?php if($totalSubscriptions > 0): ?>
+                        <span class="nav-badge"><?php echo $totalSubscriptions; ?></span>
+                        <?php endif; ?>
+                    </a>
+                    
+                    <a href="my-certificates.php" class="nav-link">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certificates</span>
+                        <?php if($totalCertificates > 0): ?>
+                        <span class="nav-badge"><?php echo $totalCertificates; ?></span>
+                        <?php endif; ?>
+                    </a>
+                    
+                    <a href="cart.php" class="nav-link">
+                        <i class="fas fa-heart"></i>
+                        <span>Wishlist</span>
+                        <?php if($wishlistCount > 0): ?>
+                        <span class="nav-badge"><?php echo $wishlistCount; ?></span>
+                        <?php endif; ?>
+                    </a>
+                    
+                    <a href="cart.php" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <?php if($cartCount > 0): ?>
+                        <span class="nav-badge cart-count"><?php echo $cartCount; ?></span>
+                        <?php endif; ?>
+                    </a>
+
                     <div class="user-menu">
                         <button class="user-button" id="userMenuBtn">
-                            <div class="user-avatar"><?php echo strtoupper(substr($first_name , 0, 1)); ?></div>
-                            <span><?php echo htmlspecialchars($first_name); htmlspecialchars($last_name); ?></span>
+                            <div class="user-avatar"><?php echo strtoupper(substr($first_name, 0, 1)); ?></div>
+                            <span><?php echo htmlspecialchars($first_name); ?></span>
                         </button>
                         <div class="dropdown-menu" id="dropdownMenu">
-                            <a href="profile.php" class="dropdown-item">My Profile</a>
-                            <a href="my-courses.php" class="dropdown-item"> My Courses</a>
-                            <a href="settings.php" class="dropdown-item"> Settings</a>
+                            <a href="profile.php" class="dropdown-item"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="my-courses.php" class="dropdown-item"><i class="fas fa-book"></i> My Courses</a>
+                            <a href="settings.php" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
                             <div class="dropdown-divider"></div>
-                            <a href="auth.php" class="dropdown-item">Logout</a>
+                            <a href="auth.php" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
                         </div>
                     </div>
                 </nav>
             </div>
         </div>
     </header>
-<button onclick="window.location.href='courses.php'">return to page</button>
+
     <!-- Main Content -->
     <div class="container">
         <div class="main-content">
@@ -559,9 +757,7 @@ background: var(--bg-secondary);
                 <div class="cart-empty">
                     <i class="fas fa-shopping-cart"></i>
                     <h3>Your cart is empty</h3>
-                    <a href="courses.php" class="btn btn-primary">
-                        <i class="fas fa-book"></i> Browse Courses
-                    </a>
+                   <button class="btn" style="margin: 10px;" onclick="window.location.href='courses.php'">browse courses</button>
                 </div>
             <?php else: ?>
                 <!-- Cart Items Table -->
